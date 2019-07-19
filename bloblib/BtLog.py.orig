@@ -25,7 +25,7 @@ def progress(iteration, steps, max_value, no_limit=False):
         else:
             sys.stdout.write('\r')
             print "[PROGRESS]\t: \t%d%%" % (100)
-    elif (not steps) or int(iteration) % steps == 0:
+    elif int(iteration) % steps == 0:
         sys.stdout.write('\r')
         print "[PROGRESS]\t: \t%d%%" % (float(int(iteration)/int(max_value))*100),
         sys.stdout.flush()
@@ -107,8 +107,8 @@ status_d = {
     '13': '[STATUS]\t: \tWriting %s',
     '14': '[STATUS]\t: Preparing view(s) ...',
     '15': '[STATUS]\t: \tLoading BlobDB into memory ...',
-    '16': '[STATUS]\t: \tDeserialising BlobDB (using \'%s\' module) (this may take a while) ...',
-    '17': '[STATUS]\t: \tDeserialising BlobDB (using \'%s\' module) (this may take a while, consider installing the \'ujson\' module) ...',
+    '16': '[STATUS]\t: \tSerialising BlobDB (using \'%s\' module) (this may take a while) ...',
+    '17': '[STATUS]\t: \tSerialising BlobDB (using \'%s\' module) (this may take a while, consider installing the \'ujson\' module) ...',
     '18': '[STATUS]\t: Extracting data for plots ...',
     '19': '[STATUS]\t: Writing output ...',
     '20': '[STATUS]\t: \tFinished in %ss',

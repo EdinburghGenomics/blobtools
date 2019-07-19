@@ -1,0 +1,9 @@
+This version has been patched to implement the --sort_first option. I've contributed
+the patch back to blobtools upstream.
+
+Use 'git diff' to see what I changed.
+
+On 6/12/18 I also fixed a bug where with a very low number of alignments the progress
+function would crash. It seems the rest of the report making is fine.
+
+On 19/7/18 I added a way to scale the Y axis from 0 to 1

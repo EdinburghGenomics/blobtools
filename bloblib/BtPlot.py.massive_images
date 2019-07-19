@@ -447,9 +447,7 @@ class PlotObj():
         if plot == 'blobplot' or plot == 'covplot':
             rect_scatter, rect_histx, rect_histy, rect_legend = set_canvas()
             # Setting up plots and axes
-            # Note the dpi setting is appropriate for the new matplotlib. The default
-            # of 400 produces massive images.
-            fig = plt.figure(1, figsize=(35,35), dpi=100)
+            fig = plt.figure(1, figsize=(35,35), dpi=400)
             axScatter = plt.axes(rect_scatter, axisbg=BGGREY)
             axScatter = set_format_scatterplot(axScatter, max_cov=self.max_cov, plot=plot)
             axScatter.set_xlabel(self.xlabel)
