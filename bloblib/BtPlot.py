@@ -106,6 +106,16 @@ def set_format_scatterplot(axScatter, **kwargs):
         min_y, max_y = 0.005, kwargs['max_cov']+1000
         axScatter.set_yscale('log')
         axScatter.set_xscale('log')
+    elif kwargs['plot'] == 'dustplot':
+        # Added by TIM where the Y axis is Non-Dustiness from 0 to 1
+        min_x, max_x = 0, 1
+        major_xticks = MultipleLocator(0.2)
+        minor_xticks = AutoMinorLocator(20)
+        min_y, max_y = -0.05, 1.05
+        axScatter.set_yscale('linear')
+        axScatter.set_xscale('linear')
+        axScatter.xaxis.set_major_locator(major_xticks)
+        axScatter.xaxis.set_minor_locator(minor_xticks)
     else:
         BtLog.error('34' % kwargs['plot'])
     axScatter.set_xlim( (min_x, max_x) )
@@ -444,7 +454,7 @@ class PlotObj():
 
 
     def setupPlot(self, plot):
-        if plot == 'blobplot' or plot == 'covplot':
+        if plot in ['blobplot', 'covplot', 'dustplot']:
             rect_scatter, rect_histx, rect_histy, rect_legend = set_canvas()
             # Setting up plots and axes
             # Note the dpi setting is appropriate for the new matplotlib. The default
@@ -472,7 +482,7 @@ class PlotObj():
             axLegend.yaxis.set_major_locator(plt.NullLocator())
             axLegend.yaxis.set_major_formatter(nullfmt)
             top_bins, right_bins = None, None
-            if plot == 'blobplot':
+            if plot in ['blobplot', 'dustplot']:
                 top_bins = arange(0, 1, 0.01)
                 right_bins = logspace(-2, (int(math.log(self.max_cov)) + 1), 200, base=10.0)
             elif plot == 'covplot':
@@ -577,7 +587,7 @@ class PlotObj():
                 colour = self.colours[group]
                 group_x_array = ''
                 group_y_array = ''
-                if self.plot == 'blobplot':
+                if self.plot in ['blobplot', 'dustplot']:
                     group_x_array = array(self.stats[group]['gc'])
                     group_y_array = array(self.stats[group]['covs'][cov_lib])
                 elif self.plot == 'covplot':

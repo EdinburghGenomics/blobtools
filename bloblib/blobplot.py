@@ -6,7 +6,7 @@
                                 [-r RANK] [-x TAXRULE] [--label GROUPS...]
                                 [--lib COVLIB] [-o PREFIX] [-m]
                                 [--sort ORDER] [--sort_first LABELS] [--hist HIST] [--notitle] [--filelabel]
-                                [--colours FILE] [--exclude FILE]
+                                [--colours FILE] [--exclude FILE] [--dustplot]
                                 [--refcov FILE] [--catcolour FILE]
                                 [--format FORMAT] [--noblobs] [--noreads] [--legend]
                                 [--cumulative]
@@ -52,6 +52,8 @@
         --colours COLOURFILE        File containing colours for (taxonomic) groups
         --exclude GROUPS            Exclude these (taxonomic) groups (also works for 'other')
                                      e.g. "Actinobacteria,Proteobacteria,other"
+        --dustplot                  Make the Y axis linear from 0 to 1. Useful for plotting things
+                                    other than coverage, like Dustiness.
         --refcov <FILE>               File containing number of "total" and "mapped" reads
                                      per coverage file. (e.g.: bam0,900,100). If provided, info
                                      will be used in read coverage plot(s).
@@ -86,6 +88,7 @@ def main():
     taxrule = args['--taxrule']
     c_index = args['--cindex']
     exclude_groups = args['--exclude']
+    dustplot = args['--dustplot']
     labels = args['--label']
     colour_f = args['--colours']
     refcov_f = args['--refcov']
@@ -122,7 +125,7 @@ def main():
     # Generate plot data
     print BtLog.status_d['18']
     data_dict, max_cov, cov_lib_dict = blobDb.getPlotData(rank, min_length, hide_nohits, taxrule, c_index, catcolour_dict)
-    plotObj = BtPlot.PlotObj(data_dict, cov_lib_dict, cov_lib_selection, 'blobplot', sort_first)
+    plotObj = BtPlot.PlotObj(data_dict, cov_lib_dict, cov_lib_selection, 'dustplot' if dustplot else 'blobplot', sort_first)
     plotObj.exclude_groups = exclude_groups
     plotObj.version = blobDb.version
     plotObj.format = format
@@ -150,7 +153,7 @@ def main():
     info_flag = 1
     out_f = ''
     for cov_lib in plotObj.cov_libs:
-        plotObj.ylabel = os.environ.get("BLOB_COVERAGE_LABEL", "Coverage")
+        plotObj.ylabel = os.environ.get("BLOB_COVERAGE_LABEL", "Non-Dustiness" if dustplot else "Coverage")
         plotObj.xlabel = os.environ.get("BLOB_GC_LABEL", "GC proportion")
         if (filelabel):
             plotObj.ylabel = basename(cov_lib_dict[cov_lib]['f'])
