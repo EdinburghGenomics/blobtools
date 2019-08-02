@@ -1,0 +1,5 @@
+docopt
+matplotlib
+tqdm
+pysam
+pyyaml>=4.2b1
