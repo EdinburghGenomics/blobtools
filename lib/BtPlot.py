@@ -90,7 +90,7 @@ def generateColourDict(colour_groups, groups):
     for idx, group in enumerate(groups):
         if group in colour_groups:
             #print(group,)
-            if group == 'no-hit' or group == 'None':
+            if group in ['no-hit', 'None', 'undef']:
                 colour_d[group] = GREY
                 #print("GREY")
                 idx_delay -= 1
