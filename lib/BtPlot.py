@@ -26,7 +26,7 @@ mat.rcParams['ytick.major.pad'] = '8'
 mat.rcParams['lines.antialiased'] = True
 
 LEGEND_FONTSIZE = 24
-COLOURMAP = "Spectral" # "Set1", "Paired", "Set2", "Spectral"
+COLOURMAP = "nipy_spectral" # "Set1", "Paired", "Set2", "Spectral"
 #GREY, BGGREY, WHITE, DGREY = '#d3d3d3', '#F0F0F5', '#ffffff', '#4d4d4d'
 GREY, BGGREY, BGCOLOUR, WHITE, DGREY = '#d3d3d3', '#F0F0F5', '#F8F8F8', '#ffffff', '#4d4d4d'
 nullfmt = NullFormatter()
@@ -79,7 +79,7 @@ def getSortedGroups(data_dict, sort_order, sort_first=()):
 def generateColourDict(colour_groups, groups):
     # Make 12 colours from the chosen map
     _cmap =  cm.get_cmap(name=COLOURMAP)
-    cmap = [ rgb2hex(_cmap(n/11)) for n in range(12) ]
+    cmap = [ rgb2hex(_cmap(n+1/len(groups))) for n in range(len(groups)) ]
 
     # remove green
     #del cmap[2]
