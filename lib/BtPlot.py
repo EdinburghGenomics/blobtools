@@ -77,9 +77,9 @@ def getSortedGroups(data_dict, sort_order, sort_first=()):
     return sorted_groups
 
 def generateColourDict(colour_groups, groups):
-    # Make 12 colours from the chosen map
+    # Make 12 colours from the chosen map using a magic formula
     _cmap =  cm.get_cmap(name=COLOURMAP)
-    cmap = [ rgb2hex(_cmap(n+1/len(groups))) for n in range(len(groups)) ]
+    cmap = [ rgb2hex(_cmap( (n+1) / (len(colour_groups)+1) )) for n in range( len(colour_groups)+1 ) ]
 
     # remove green
     #del cmap[2]
