@@ -25,8 +25,8 @@ mat.rcParams['xtick.major.pad'] = '8'
 mat.rcParams['ytick.major.pad'] = '8'
 mat.rcParams['lines.antialiased'] = True
 
-LEGEND_FONTSIZE = 20
-COLOURMAP = "tab10" # "Set1", "Paired", "Set2", "Spectral"
+LEGEND_FONTSIZE = 24
+COLOURMAP = "Spectral" # "Set1", "Paired", "Set2", "Spectral"
 #GREY, BGGREY, WHITE, DGREY = '#d3d3d3', '#F0F0F5', '#ffffff', '#4d4d4d'
 GREY, BGGREY, BGCOLOUR, WHITE, DGREY = '#d3d3d3', '#F0F0F5', '#F8F8F8', '#ffffff', '#4d4d4d'
 nullfmt = NullFormatter()
