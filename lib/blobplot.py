@@ -64,7 +64,7 @@
 from docopt import docopt
 
 from os.path import basename
-import sys
+import os, sys
 import lib.BtLog as BtLog
 import lib.BtIO as BtIO
 import lib.BtCore as BtCore
