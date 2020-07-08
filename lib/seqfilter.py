@@ -20,6 +20,12 @@ from tqdm import tqdm
 import lib.BtLog as BtLog
 import lib.BtIO as BtIO
 
+# Quick-and-dirty bypass tqdm when noninteractive
+import sys
+if not sys.stderr.isatty():
+    from unittest.mock import MagicMock
+    tqdm = MagicMock()
+
 def main():
     args = docopt(__doc__)
     fasta_f = args['--infile']

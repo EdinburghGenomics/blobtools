@@ -21,6 +21,11 @@ import yaml
 # CONSTs
 COMPLEMENT = {'A':'T','C':'G','G':'C','T':'A','N':'N'}
 
+# Quick-and-dirty bypass tqdm when noninteractive
+if not sys.stderr.isatty():
+    from unittest.mock import MagicMock
+    tqdm = MagicMock()
+
 def create_dir(directory="", overwrite=True):
     if directory:
         if not isdir(directory):

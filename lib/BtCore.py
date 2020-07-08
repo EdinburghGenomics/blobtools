@@ -15,6 +15,11 @@ from collections import defaultdict
 import sys
 from tqdm import tqdm
 
+# Quick-and-dirty bypass tqdm when noninteractive
+if not sys.stderr.isatty():
+    from unittest.mock import MagicMock
+    tqdm = MagicMock()
+
 class BlobDb():
     '''
     class BlobDB holds all information parsed from files
